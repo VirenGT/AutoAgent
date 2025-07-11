@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>AutoAgent</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- React and ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet" />
+    <style>
+      body {
+        background-color: black;
+        font-family: 'Orbitron', sans-serif;
+        color: white;
+      }
+
+      .glitch-text {
+        position: relative;
+        color: #00ffcc;
+        animation: glitch 1s infinite;
+      }
+
+      @keyframes glitch {
+        0% { text-shadow: 1px 1px #0f0, -1px -1px #f0f; }
+        25% { text-shadow: 2px 2px #0f0, -2px -2px #f0f; }
+        50% { text-shadow: -1px 1px #0f0, 1px -1px #f0f; }
+        75% { text-shadow: 1px -1px #0f0, -1px 1px #f0f; }
+        100% { text-shadow: 1px 1px #0f0, -1px -1px #f0f; }
+      }
+
+      .neon-text {
+        color: #00ffcc;
+        text-shadow: 0 0 5px #00ffcc, 0 0 10px #00ffcc, 0 0 20px #00ffcc;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const { useState } = React;
+
+      const App = () => {
+        const [menuOpen, setMenuOpen] = useState(false);
+
+        const icons = {
+          Clinic: (
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-3-3h-10a3 3 0 00-3 3v2h5m5 0v-2a3 3 0 00-3-3H6a3 3 0 00-3 3v2h5m4-8H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V9a3 3 0 013-3h14a3 3 0 013 3v1" />
+            </svg>
+          ),
+          Freelancer: (
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14L9 10l3-4 3 4zm8 2v.003l-.001.002c-.001.002-.002.004-.002.006v.085c0 .006.001.011.003.015.034.056.097.111.176.176.077.065.146.128.216.187a1.724 1.724 0 003.148 0c.07-.059.14-.122.207-.188.077-.065.143-.12.208-.176.002-.004.003-.007.003-.01a21.144 21.144 0 00-.001-.185v-.085c-.001-.006-.002-.011-.003-.015zM12 14c2.21 0 4-1.79 4-4 0-2.21-1.79-4-4-4s-4 1.79-4 4 1.79 4 4 4zm0-8c-2.21 0-4 1.79-4 4h12c0-2.21-1.79-4-4-4z" />
+            </svg>
+          ),
+          Creator: (
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8v8a1 1 0 01-1.454 1.269L15 18m-3 4H9a2 2 0 01-2-2V8a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2zm9-4H10v6a2 2 0 002 2h2a2 2 0 002-2v-6z" />
+            </svg>
+          ),
+          Agency: (
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 011.617.104l.194.037a12.03 12.03 0 002.292.743c.034.017.068.033.102.05M12 14l-6.16-3.423a12.083 12.083 0 01-1.617-.104l-.194-.037a12.03 12.03 0 00-2.292-.743c-.034-.017-.068-.033-.102-.05" />
+            </svg>
+          ),
+          Coach: (
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 011.617.104l.194.037a12.03 12.03 0 002.292.743c.034.017.068.033.102.05M12 14l-6.16-3.423a12.083 12.083 0 01-1.617-.104l-.194-.037a12.03 12.03 0 00-2.292-.743c-.034-.017-.068-.033-.102-.05" />
+            </svg>
+          ),
+        };
+
+        return (
+          <div className="min-h-screen bg-black text-white">
+            <header className="sticky top-0 z-50 flex justify-between items-center px-6 py-4 bg-black border-b border-green-700 shadow-md">
+              <h1 className="text-xl md:text-2xl font-bold text-green-400">AutoAgent</h1>
+              <nav className="hidden md:flex space-x-6 text-sm font-medium">
+                {["#features", "#who-for", "#how-it-works", "#contact"].map((link, i) => (
+                  <a key={i} href={link} className="hover:text-green-400 transition-colors">{
+                    link.replace("#", "").replaceAll("-", " ").replace(/\b\w/g, c => c.toUpperCase())
+                  }</a>
+                ))}
+              </nav>
+              <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden text-green-400">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+              </button>
+            </header>
+
+            {menuOpen && (
+              <div className="md:hidden bg-black border-t border-green-900 p-4 space-y-4">
+                {["#features", "#who-for", "#how-it-works", "#contact"].map((link, i) => (
+                  <a key={i} href={link} className="block hover:text-green-400 transition">{link.replace("#", "")}</a>
+                ))}
+              </div>
+            )}
+
+            <section className="min-h-screen flex flex-col justify-center items-center px-6 py-16 text-center">
+              <h2 className="text-4xl md:text-6xl font-extrabold mb-6 glitch-text">The AI Agent That Runs Your Business — 24/7</h2>
+              <p className="text-lg md:text-xl text-gray-300 max-w-2xl mb-10">Fully automated. Works across any niche. No code needed.</p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a href="https://docs.google.com/document/d/1GdjYwXRDTaa4tbvm1HmzQtZTssBeRmgyvnrFEibaS-A/edit?usp=sharing" className="px-8 py-3 bg-green-500 text-black font-semibold rounded-full hover:bg-green-400 transition">Book Your AI Agent Now</a>
+                <a href="https://docs.google.com/document/d/1BnzmqsHoLOLBPQa7N_1IKR9F5j889tw9Z0qL12QJheY/edit?usp=sharing" className="px-8 py-3 border border-green-500 text-green-400 font-semibold rounded-full hover:bg-green-900 transition">Try the Demo</a>
+              </div>
+            </section>
+
+            <section id="features" className="py-16 px-6">
+              <h3 className="text-3xl font-bold text-center mb-12 neon-text">What AutoAgent Does</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                {[
+                  ["Instant Replies", "Responds in under 7 seconds, day or night."],
+                  ["Bookings & Meetings", "Handles date/time and syncs with Google Sheets."],
+                  ["Answers Questions", "Explains services, pricing, FAQs based on your info."],
+                  ["Automatic Logging", "Stores all data into Google Sheets instantly."],
+                  ["Works Anywhere", "IG DMs, WhatsApp, websites — no niche is too unique."],
+                  ["No Code Setup", "Built on n8n, GPT, and Sheets — zero developers needed."],
+                ].map(([title, desc], i) => (
+                  <div key={i} className="bg-gray-900 p-6 rounded-lg shadow-lg border border-green-800 hover:shadow-green-800 transition-shadow">
+                    <h4 className="text-xl font-bold mb-2 text-green-400">{title}</h4>
+                    <p className="text-gray-400">{desc}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            <section id="who-for" className="py-16 px-6">
+              <h3 className="text-3xl font-bold text-center mb-12 neon-text">Perfect For</h3>
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-6 max-w-5xl mx-auto text-center">
+                {["Clinic", "Freelancer", "Creator", "Agency", "Coach"].map((type, i) => (
+                  <div key={i} className="p-4 border border-green-800 rounded-lg hover:bg-green-900 transition">
+                    <div className="text-green-400 text-2xl mb-2">{icons[type]}</div>
+                    <p>{type + (type.endsWith("s") ? "" : "s")}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            <section className="py-16 px-6 text-center">
+              <h3 className="text-3xl md:text-4xl font-bold mb-6">Ready to automate your business?</h3>
+              <a href="https://docs.google.com/document/d/1GdjYwXRDTaa4tbvm1HmzQtZTssBeRmgyvnrFEibaS-A/edit?usp=sharing" className="inline-block px-8 py-3 bg-green-500 text-black font-semibold rounded-full hover:bg-green-400 transition">Book Your AI Agent Now</a>
+            </section>
+
+            <footer id="contact" className="py-8 px-6 text-center border-t border-green-900">
+              <p>📧 Contact: <a href="mailto:viren.g.tikwani@gmail.com" className="text-green-400 hover:underline">viren.g.tikwani@gmail.com</a></p>
+              <p className="mt-2">📷 Instagram: <a href="https://www.instagram.com/virentikwani" className="text-green-400 hover:underline">@virentikwani</a></p>
+              <p className="mt-4 text-sm text-gray-500">&copy; 2025 AutoAgent. All rights reserved.</p>
+            </footer>
+          </div>
+        );
+      };
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>
