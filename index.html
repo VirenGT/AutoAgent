@@ -83,9 +83,9 @@
               <h1 className="text-xl md:text-2xl font-bold text-green-400">AutoAgent</h1>
               <nav className="hidden md:flex space-x-6 text-sm font-medium">
                 {["#features", "#who-for", "#how-it-works", "#contact"].map((link, i) => (
-                  <a key={i} href={link} className="hover:text-green-400 transition-colors">{
-                    link.replace("#", "").replaceAll("-", " ").replace(/\b\w/g, c => c.toUpperCase())
-                  }</a>
+                  <a key={i} href={link} className="hover:text-green-400 transition-colors">
+                    {link.replace("#", "").replaceAll("-", " ").replace(/\b\w/g, c => c.toUpperCase())}
+                  </a>
                 ))}
               </nav>
               <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden text-green-400">
@@ -98,7 +98,9 @@
             {menuOpen && (
               <div className="md:hidden bg-black border-t border-green-900 p-4 space-y-4">
                 {["#features", "#who-for", "#how-it-works", "#contact"].map((link, i) => (
-                  <a key={i} href={link} className="block hover:text-green-400 transition">{link.replace("#", "")}</a>
+                  <a key={i} href={link} className="block hover:text-green-400 transition">
+                    {link.replace("#", "")}
+                  </a>
                 ))}
               </div>
             )}
@@ -140,6 +142,21 @@
                     <p>{type + (type.endsWith("s") ? "" : "s")}</p>
                   </div>
                 ))}
+              </div>
+            </section>
+
+            {/* ✅ DEMO VIDEO SECTION ADDED HERE */}
+            <section className="py-16 px-6 text-center">
+              <h3 className="text-3xl md:text-4xl font-bold text-green-400 mb-8">Quick Demo Video</h3>
+              <div className="w-full max-w-4xl mx-auto aspect-video">
+                <iframe
+                  className="w-full h-full rounded-lg border border-green-800"
+                  src="https://www.youtube.com/embed/YOW4IH2JfZk"
+                  title="AutoAgent Demo Video"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                ></iframe>
               </div>
             </section>
 
